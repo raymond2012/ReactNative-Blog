@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, FlatList, Button } from "react-native";
 import { Context as BlogContext } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
-const IndexScreen = () => {
+import { withNavigation } from "react-navigation";
+import ShowScreen from "./ShowScreen";
+const IndexScreen = ({ navigation }) => {
   const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
 
   return (
@@ -17,14 +18,20 @@ const IndexScreen = () => {
         }}
         renderItem={({ item }) => {
           return (
-            <View style={styles.row}>
-              <Text style={styles.title}>
-                {item.title} - {item.id}
-              </Text>
-              <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                <Feather style={styles.icon} name="trash" />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Show", { id: item.id });
+              }}
+            >
+              <View style={styles.row}>
+                <Text style={styles.title}>
+                  {item.title} - {item.id}
+                </Text>
+                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                  <Feather style={styles.icon} name="trash" />
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
           );
         }}
       />
