@@ -1,15 +1,21 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View, FlatList, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { Context as BlogContext } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { withNavigation } from "react-navigation";
-import ShowScreen from "./ShowScreen";
+
 const IndexScreen = ({ navigation }) => {
   const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
 
   return (
     <View>
+      <Text></Text>
       <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={state}
@@ -37,6 +43,16 @@ const IndexScreen = ({ navigation }) => {
       />
     </View>
   );
+};
+
+IndexScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: (
+      <TouchableOpacity onPress={() => navigation.navigate("Create")}>
+        <Feather name="plus" size={30} />
+      </TouchableOpacity>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({
