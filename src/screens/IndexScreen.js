@@ -15,8 +15,6 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text></Text>
-      <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={state}
         keyExtractor={(blogPost) => {
@@ -65,6 +63,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    margin: 5,
   },
   icon: {
     fontSize: 24,
